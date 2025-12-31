@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>LeadFLOW-Pro | Automação de Leads</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Automatize sua captação e gestão de leads com o LeadFLOW-Pro." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-soft: rgba(37, 99, 235, 0.12);
+      --primary-dark: #1d4ed8;
+      --secondary: #10b981;
+      --bg-body: #0f172a;
+      --bg-section: #020617;
+      --bg-card: #020617;
+      --text-main: #e5e7eb;
+      --text-soft: #9ca3af;
+      --border-subtle: rgba(148, 163, 184, 0.3);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.85);
+      --shadow-card: 0 14px 35px rgba(15, 23, 42, 0.85);
+      --max-width: 1140px;
+      --transition-fast: 0.2s ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #1f2937 0, #020617 45%, #000 100%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Container geral */
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(20px);
+      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.3), transparent);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .logo-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 13px;
+      background: radial-gradient(circle at 10% 0, #60a5fa, #2563eb 40%, #0f172a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(37, 99, 235, 0.65);
+    }
+
+    .logo-badge span {
+      font-family: "Poppins", system-ui;
+      font-size: 18px;
+      font-weight: 700;
+      color: #e5e7eb;
+      letter-spacing: 0.03em;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .logo-title {
+      font-family: "Poppins", system-ui;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .logo-sub {
+      font-size: 11px;
+      color: var(--text-soft);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      font-size: 14px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      color: var(--text-soft);
+      padding-bottom: 4px;
+      border-bottom: 1px solid transparent;
+      transition: color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .nav-link:hover {
+      color: var(--text-main);
+      border-color: rgba(148, 163, 184, 0.6);
+      transform: translateY(-1px);
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .btn-outline {
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: radial-gradient(circle at top left, rgba(148, 163, 184, 0.4), rgba(15, 23, 42, 0.2));
+      font-size: 13px;
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      transition: border-color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--text-main);
+      background: radial-gradient(circle at top left, rgba(148, 163, 184, 0.55), rgba(15, 23, 42, 0.5));
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      padding: 0.6rem 1.3rem;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #f9fafb;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 15px 35px rgba(37, 99, 235, 0.65);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-fast);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 45px rgba(37, 99, 235, 0.75);
+      opacity: 0.96;
+    }
+
+    .btn-primary span {
+      font-size: 1.05em;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 3.75rem 0 4.5rem;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.1fr);
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .badge-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.25rem 0.7rem 0.25rem 0.25rem;
+      border-radius: 999px;
+      border: 1px solid rgba(52, 211, 153, 0.5);
+      background: radial-gradient(circle at left, rgba(34, 197, 94, 0.35), rgba(15, 23, 42, 0.9));
+      margin-bottom: 1.25rem;
+    }
+
+    .badge-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 25%, #bbf7d0, #22c55e 40%, #15803d 70%);
+      box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.35);
+    }
+
+    .badge-label {
+      font-size: 12px;
+      color: #bbf7d0;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-family: "Poppins", system-ui;
+      font-size: clamp(2.2rem, 3vw, 2.6rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, #60a5fa, #38bdf8, #a855f7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 0.97rem;
+      color: var(--text-soft);
+      max-width: 31rem;
+      line-height: 1.6;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .metric-item {
+      min-width: 120px;
+    }
+
+    .metric-value {
+      font-family: "Poppins", system-ui;
+      font-size: 1.65rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+    }
+
+    .metric-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-soft);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-note {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .hero-note strong {
+      color: #e5e7eb;
+    }
+
+    .hero-secondary-note {
+      margin-top: 0.25rem;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
+
+    /* Mockup / Dashboard */
+    .hero-visual-wrap {
+      position: relative;
+    }
+
+    .mockup-card {
+      position: relative;
+      border-radius: 22px;
+      background: radial-gradient(circle at top left, rgba(148, 163, 184, 0.18), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: var(--shadow-soft);
+      padding: 1.1rem 1.1rem 1.2rem;
+      overflow: hidden;
+    }
+
+    .mockup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.7rem;
+    }
+
+    .mockup-controls {
+      display: flex;
+      gap: 0.3rem;
+    }
+
+    .mockup-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+    }
+
+    .mockup-dot.red {
+      background-color: #f97373;
+    }
+
+    .mockup-dot.yellow {
+      background-color: #fbbf24;
+    }
+
+    .mockup-dot.green {
+      background-color: #34d399;
+    }
+
+    .mockup-tabs {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.16rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    .mockup-tab {
+      padding: 0.26rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      color: var(--text-soft);
+      cursor: default;
+    }
+
+    .mockup-tab.active {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.9), rgba(37, 99, 235, 0.6));
+      color: #eff6ff;
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.7);
+    }
+
+    .mockup-body {
+      display: grid;
+      grid-template-columns: 3fr 2.4fr;
+      gap: 1rem;
+      margin-top: 0.7rem;
+    }
+
+    .mockup-main-panel {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 0.8rem 0.8rem 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .mockup-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .mockup-panel-title {
+      font-size: 0.82rem;
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .mockup-filters {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .mockup-tag {
+      padding: 0.12rem 0.45rem;
+      border-radius: 999px;
+      font-size: 0.68rem;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--text-soft);
+    }
+
+    .mockup-tag.green {
+      border-color: rgba(34, 197, 94, 0.7);
+      color: #bbf7d0;
+    }
+
+    .mockup-table {
+      border-radius: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      overflow: hidden;
+    }
+
+    .mockup-table-header,
+    .mockup-table-row {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1.1fr 1fr;
+      font-size: 0.72rem;
+      align-items: center;
+      padding: 0.4rem 0.6rem;
+    }
+
+    .mockup-table-header {
+      background: rgba(15, 23, 42, 0.92);
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      font-size: 0.7rem;
+    }
+
+    .mockup-table-row:nth-child(odd) {
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.07), rgba(15, 23, 42, 0.98));
+    }
+
+    .mockup-table-row:nth-child(even) {
+      background: rgba(15, 23, 42, 0.97);
+    }
+
+    .mockup-status-pill {
+      padding: 0.12rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.65rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.18rem;
+    }
+
+    .mockup-status-pill span {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    .mockup-status-pill.green {
+      color: #bbf7d0;
+      background: rgba(22, 163, 74, 0.2);
+    }
+
+    .mockup-status-pill.green span {
+      background-color: #22c55e;
+    }
+
+    .mockup-status-pill.yellow {
+      color: #facc15;
+      background: rgba(234, 179, 8, 0.16);
+    }
+
+    .mockup-status-pill.yellow span {
+      background-color: #eab308;
+    }
+
+    .mockup-status-pill.red {
+      color: #fecaca;
+      background: rgba(248, 113, 113, 0.18);
+    }
+
+    .mockup-status-pill.red span {
+      background-color: #f97373;
+    }
+
+    .mockup-side-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .mockup-card-small {
+      border-radius: 15px;
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.25), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 0.7rem 0.75rem;
+      box-shadow: var(--shadow-card);
+    }
+
+    .mockup-card-small h4 {
+      font-size: 0.8rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .mockup-funnel {
+      display: flex;
+      flex-direction: column;
+      gap: 0.28rem;
+    }
+
+    .mockup-funnel-step {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.74rem;
+      color: var(--text-soft);
+    }
+
+    .mockup-funnel-bar {
+      width: 100%;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      overflow: hidden;
+      margin-top: 0.16rem;
+    }
+
+    .mockup-funnel-bar-inner {
+      height: 100%;
+      background: linear-gradient(90deg, #22c55e, #eab308);
+    }
+
+    .mockup-whats-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+    }
+
+    .mockup-whats-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mockup-whats-tag {
+      padding: 0.16rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(45, 212, 191, 0.65);
+      color: #a5f3fc;
+      font-size: 0.7rem;
+    }
+
+    .mockup-whats-bubble {
+      margin-top: 0.35rem;
+      padding: 0.4rem 0.6rem;
+      border-radius: 12px;
+      background: radial-gradient(circle at top left, rgba(45, 212, 191, 0.25), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(45, 212, 191, 0.7);
+      display: flex;
+      flex-direction: column;
+      gap: 0.12rem;
+    }
+
+    .mockup-whats-bubble span {
+      font-size: 0.72rem;
+      color: #e0f2fe;
+    }
+
+    /* Seções */
+    .section {
+      padding: 3.5rem 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      gap: 1.5rem;
+    }
+
+    .section-title {
+      font-family: "Poppins", system-ui;
+      font-size: 1.45rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-subtitle {
+      font-size: 0.92rem;
+      color: var(--text-soft);
+      max-width: 26rem;
+    }
+
+    /* Benefícios */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.6rem;
+    }
+
+    .benefit-card {
+      border-radius: var(--radius-md);
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 1rem;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .benefit-icon-wrap {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.3), rgba(15, 23, 42, 1));
+      border: 1px solid rgba(59, 130, 246, 0.7);
+      margin-bottom: 0.3rem;
+    }
+
+    .benefit-icon {
+      font-size: 0.95rem;
+    }
+
+    .benefit-title {
+      font-size: 0.98rem;
+      font-weight: 500;
+    }
+
+    .benefit-text {
+      font-size: 0.86rem;
+      color: var(--text-soft);
+      line-height: 1.55;
+    }
+
+    .benefit-tagline {
+      font-size: 0.74rem;
+      color: #93c5fd;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 0.2rem;
+    }
+
+    /* Como funciona */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    .step-card {
+      border-radius: var(--radius-md);
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-number {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top, #60a5fa, #2563eb);
+      color: #eff6ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      margin-bottom: 0.5rem;
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.75);
+    }
+
+    .step-title {
+      font-size: 0.92rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    .step-text {
+      font-size: 0.84rem;
+      color: var(--text-soft);
+      line-height: 1.55;
+    }
+
+    /* Planos */
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.6rem;
+    }
+
+    .plan-card {
+      border-radius: 20px;
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 1), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      padding: 1.3rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      box-shadow: var(--shadow-card);
+    }
+
+    .plan-card.featured {
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.25), rgba(15, 23, 42, 0.98));
+      border-color: rgba(59, 130, 246, 0.85);
+      transform: translateY(-4px);
+    }
+
+    .plan-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #bfdbfe;
+    }
+
+    .plan-name {
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    .plan-price {
+      margin-top: 0.35rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .plan-price span {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      font-weight: 400;
+    }
+
+    .plan-desc {
+      font-size: 0.84rem;
+      color: var(--text-soft);
+    }
+
+    .plan-features {
+      margin: 0.5rem 0 0.9rem;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-size: 0.82rem;
+      color: var(--text-main);
+    }
+
+    .plan-features li::before {
+      content: "• ";
+      color: #4ade80;
+    }
+
+    .plan-cta {
+      margin-top: auto;
+    }
+
+    .btn-plan {
+      width: 100%;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--text-main);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .plan-card.featured .btn-plan {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-color: rgba(37, 99, 235, 0.9);
+      box-shadow: 0 18px 40px rgba(37, 99, 235, 0.7);
+    }
+
+    .btn-plan:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.8);
+    }
+
+    /* Depoimentos / Prova social */
+    .testimonials-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.1fr);
+      gap: 1.8rem;
+      align-items: center;
+    }
+
+    .logos-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem 1.4rem;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .logos-strip span {
+      padding: 0.3rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .testimonial-card {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, rgba(148, 163, 184, 0.16), rgba(15, 23, 42, 0.97));
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      padding: 1.1rem 1.1rem 1.2rem;
+      box-shadow: var(--shadow-card);
+      font-size: 0.87rem;
+      color: var(--text-soft);
+    }
+
+    .testimonial-quote {
+      margin-bottom: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.82rem;
+    }
+
+    .testimonial-name {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .testimonial-role {
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
+
+    /* Rodapé */
+    .footer {
+      border-top: 1px solid rgba(31, 41, 55, 1);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), #020617);
+      margin-top: auto;
+    }
+
+    .footer-inner {
+      padding: 1.75rem 0 1.3rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.4rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      opacity: 0.9;
+      transition: opacity var(--transition-fast), color var(--transition-fast);
+    }
+
+    .footer-link:hover {
+      opacity: 1;
+      color: #e5e7eb;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 0.7rem;
+    }
+
+    .footer-social a {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+    }
+
+    /* Responsivo */
+    @media (max-width: 1024px) {
+      .hero-inner,
+      .testimonials-wrap {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-inner {
+        gap: 2.6rem;
+      }
+
+      .hero-visual-wrap {
+        order: -1;
+      }
+
+      .benefits-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .steps-grid,
+      .plans-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-inner {
+        height: auto;
+        padding: 0.75rem 0;
+        gap: 0.75rem;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .nav-links {
+        display: none; /* pode trocar depois por um menu mobile */
+      }
+
+      .hero {
+        padding-top: 2.2rem;
+      }
+
+      .benefits-grid,
+      .steps-grid,
+      .plans-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .mockup-body {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- HEADER -->
+    <header class="header">
+      <div class="container header-inner">
+        <a href="#top" class="logo-wrap">
+          <div class="logo-badge">
+            <span>LF</span>
+          </div>
+          <div class="logo-text">
+            <div class="logo-title">LeadFLOW-Pro</div>
+            <div class="logo-sub">Funis e automações</div>
+          </div>
+        </a>
+
+        <nav class="nav">
+          <div class="nav-links">
+            <a href="#beneficios" class="nav-link">Benefícios</a>
+            <a href="#como-funciona" class="nav-link">Como funciona</a>
+            <a href="#planos" class="nav-link">Planos</a>
+            <a href="#contato" class="nav-link">Contato</a>
+          </div>
+          <div class="nav-cta">
+            <button class="btn-outline" type="button">
+              Ver demonstração
+            </button>
+            <a href="app.html">
+  <button class="btn-primary" type="button">
+    <span>Acessar sistema LeadFLOW</span>
+  </button>
+</a>
+
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <main>
+      <section class="hero" id="top">
+        <div class="container hero-inner">
+          <div>
+            <div class="badge-top">
+              <div class="badge-dot"></div>
+              <span class="badge-label">Sistema inteligente de captação</span>
+            </div>
+
+            <h1 class="hero-title">
+              Automatize seus <span>leads</span> e foque em fechar vendas.
+            </h1>
+            <p class="hero-subtitle">
+              LeadFLOW-Pro organiza, nutre e distribui leads em tempo real, com funis prontos, disparos automatizados e visão completa do desempenho da sua operação.
+            </p>
+
+            <div class="hero-metrics">
+              <div class="metric-item">
+                <div class="metric-value">+234%</div>
+                <div class="metric-label">Aumento médio na conversão</div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-value">-48%</div>
+                <div class="metric-label">Redução de tempo manual</div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-value">24/7</div>
+                <div class="metric-label">Captação contínua</div>
+              </div>
+            </div>
+
+            <div class="hero-actions">
+              <a href="app.html">
+  <button class="btn-primary" type="button">
+    <span>Iniciar teste gratuito</span>
+  </button>
+</a>
+
+              <button class="btn-outline" type="button">
+                Ver planos
+              </button>
+            </div>
+            <div class="hero-note">
+              <strong>Sem cartão de crédito.</strong> Onboarding guiado e suporte na implantação.
+            </div>
+            <div class="hero-secondary-note">
+              Ideal para equipes comerciais, agências, escolas e operação de atendimento.
+            </div>
+          </div>
+
+          <div class="hero-visual-wrap">
+            <div class="mockup-card">
+              <div class="mockup-header">
+                <div class="mockup-controls">
+                  <div class="mockup-dot red"></div>
+                  <div class="mockup-dot yellow"></div>
+                  <div class="mockup-dot green"></div>
+                </div>
+                <div class="mockup-tabs">
+                  <div class="mockup-tab active">Leads</div>
+                  <div class="mockup-tab">Funis</div>
+                  <div class="mockup-tab">WhatsApp</div>
+                </div>
+              </div>
+
+              <div class="mockup-body">
+                <div class="mockup-main-panel">
+                  <div class="mockup-panel-header">
+                    <div>
+                      <div class="mockup-panel-title">Leads em tempo real</div>
+                      <div style="font-size: 0.74rem; color: var(--text-soft);">
+                        Captura, classificação e distribuição automática.
+                      </div>
+                    </div>
+                    <div class="mockup-filters">
+                      <div class="mockup-tag green">Online</div>
+                      <div class="mockup-tag">Hoje</div>
+                    </div>
+                  </div>
+
+                  <div class="mockup-table">
+                    <div class="mockup-table-header">
+                      <div>Nome</div>
+                      <div>Origem</div>
+                      <div>Estágio</div>
+                      <div>Responsável</div>
+                    </div>
+
+                    <div class="mockup-table-row">
+                      <div>Maria Santos</div>
+                      <div>Landing GATE</div>
+                      <div>
+                        <div class="mockup-status-pill green">
+                          <span></span>
+                          Quente
+                        </div>
+                      </div>
+                      <div>Equipe Comercial</div>
+                    </div>
+                    <div class="mockup-table-row">
+                      <div>João Lima</div>
+                      <div>Tráfego pago</div>
+                      <div>
+                        <div class="mockup-status-pill.yellow">
+                          <span></span>
+                          Nutrição
+                        </div>
+                      </div>
+                      <div>SDR 2</div>
+                    </div>
+                    <div class="mockup-table-row">
+                      <div>Ana Paula</div>
+                      <div>WhatsApp</div>
+                      <div>
+                        <div class="mockup-status-pill red">
+                          <span></span>
+                          Reengajar
+                        </div>
+                      </div>
+                      <div>Follow-up</div>
+                    </div>
+                    <div class="mockup-table-row">
+                      <div>Lucas Alves</div>
+                      <div>Orgânico</div>
+                      <div>
+                        <div class="mockup-status-pill.green">
+                          <span></span>
+                          Proposta
+                        </div>
+                      </div>
+                      <div>Closer 1</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mockup-side-panel">
+                  <div class="mockup-card-small">
+                    <h4>Funil LeadFLOW-Pro</h4>
+                    <div class="mockup-funnel">
+                      <div class="mockup-funnel-step">
+                        <span>Captação</span>
+                        <span>100%</span>
+                      </div>
+                      <div class="mockup-funnel-bar">
+                        <div class="mockup-funnel-bar-inner" style="width: 100%;"></div>
+                      </div>
+
+                      <div class="mockup-funnel-step">
+                        <span>Qualificação</span>
+                        <span>64%</span>
+                      </div>
+                      <div class="mockup-funnel-bar">
+                        <div class="mockup-funnel-bar-inner" style="width: 64%; background: linear-gradient(90deg, #22c55e, #eab308);"></div>
+                      </div>
+
+                      <div class="mockup-funnel-step">
+                        <span>Proposta</span>
+                        <span>38%</span>
+                      </div>
+                      <div class="mockup-funnel-bar">
+                        <div class="mockup-funnel-bar-inner" style="width: 38%; background: linear-gradient(90deg, #facc15, #f97373);"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mockup-card-small">
+                    <div class="mockup-whats-card">
+                      <div class="mockup-whats-header">
+                        <div>
+                          <div style="font-size: 0.8rem; color: #e5e7eb;">Fluxo WhatsApp</div>
+                          <div style="font-size: 0.72rem; color: var(--text-soft);">Resposta em até 40s</div>
+                        </div>
+                        <div class="mockup-whats-tag">Ativo</div>
+                      </div>
+                      <div class="mockup-whats-bubble">
+                        <span>• Mensagem automática de boas-vindas</span>
+                        <span>• Perguntas de qualificação em 3 etapas</span>
+                        <span>• Transferência para humano quando necessário</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BENEFÍCIOS -->
+      <section class="section" id="beneficios">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Tudo que precisa em um único funil.</h2>
+              <p class="section-subtitle">
+                Deixe planilhas e controles manuais para trás. Tenha visão clara de cada lead, canal e etapa do processo comercial.
+              </p>
+            </div>
+          </div>
+
+          <div class="benefits-grid">
+            <div class="benefit-card">
+              <div class="benefit-icon-wrap">
+                <span class="benefit-icon">⚙️</span>
+              </div>
+              <div class="benefit-tagline">Automação</div>
+              <h3 class="benefit-title">Fluxos prontos e personalizáveis</h3>
+              <p class="benefit-text">
+                Crie funis de atendimento, nutrição e pós-venda com disparos automáticos por e-mail, WhatsApp ou SMS, baseado em gatilhos e prazos.
+              </p>
+            </div>
+
+            <div class="benefit-card">
+              <div class="benefit-icon-wrap">
+                <span class="benefit-icon">📊</span>
+              </div>
+              <div class="benefit-tagline">Visão em tempo real</div>
+              <h3 class="benefit-title">Painéis com métricas de conversão</h3>
+              <p class="benefit-text">
+                Acompanhe conversão por etapa, origem de tráfego, atendente e tempo médio de resposta, com filtros por período.
+              </p>
+            </div>
+
+            <div class="benefit-card">
+              <div class="benefit-icon-wrap">
+                <span class="benefit-icon">🤖</span>
+              </div>
+              <div class="benefit-tagline">Integrações</div>
+              <h3 class="benefit-title">WhatsApp, formulários e APIs</h3>
+              <p class="benefit-text">
+                Conecte formulários, páginas de captura, anúncios e integrações com WhatsApp para receber todos os leads em um só lugar.
+              </p>
+            </div>
+
+            <div class="benefit-card">
+              <div class="benefit-icon-wrap">
+                <span class="benefit-icon">🧭</span>
+              </div>
+              <div class="benefit-tagline">Distribuição inteligente</div>
+              <h3 class="benefit-title">Regras por equipe e horário</h3>
+              <p class="benefit-text">
+                Distribua automaticamente os leads entre atendentes ou grupos, considerando horários de plantão, fila e prioridades.
+              </p>
+            </div>
+
+            <div class="benefit-card">
+              <div class="benefit-icon-wrap">
+                <span class="benefit-icon">📝</span>
+              </div>
+              <div class="benefit-tagline">Registro completo</div>
+              <h3 class="benefit-title">Linha do tempo do lead</h3>
+              <p class="benefit-text">
+                Visualize todo o histórico de mensagens, contatos, mudanças de estágio e responsáveis de cada lead, em um único painel.
+              </p>
+            </div>
+
+            <div class="benefit-card">
+              <div class="benefit-icon-wrap">
+                <span class="benefit-icon">🔐</span>
+              </div>
+              <div class="benefit-tagline">Segurança</div>
+              <h3 class="benefit-title">Perfis de acesso e trilhas</h3>
+              <p class="benefit-text">
+                Defina perfis com permissões específicas para supervisores, atendentes e administradores, com trilha de atividades.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMO FUNCIONA -->
+      <section class="section" id="como-funciona">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Como o LeadFLOW-Pro funciona na prática.</h2>
+              <p class="section-subtitle">
+                Em poucos passos, você estrutura um funil completo, integra seus canais e começa a acompanhar resultados em tempo real.
+              </p>
+            </div>
+          </div>
+
+          <div class="steps-grid">
+            <div class="step-card">
+              <div class="step-number">1</div>
+              <h3 class="step-title">Configure seu funil</h3>
+              <p class="step-text">
+                Defina as etapas (captado, qualificado, em proposta, fechado, etc.), prazos e gatilhos de automação.
+              </p>
+            </div>
+
+            <div class="step-card">
+              <div class="step-number">2</div>
+              <h3 class="step-title">Conecte seus canais</h3>
+              <p class="step-text">
+                Integre formulários, páginas, anúncios e WhatsApp para que todos os leads caiam direto no funil.
+              </p>
+            </div>
+
+            <div class="step-card">
+              <div class="step-number">3</div>
+              <h3 class="step-title">Distribua a equipe</h3>
+              <p class="step-text">
+                Configure regras de distribuição por horário, fila ou tipo de lead, garantindo agilidade no primeiro contato.
+              </p>
+            </div>
+
+            <div class="step-card">
+              <div class="step-number">4</div>
+              <h3 class="step-title">Acompanhe e otimize</h3>
+              <p class="step-text">
+                Monitore as taxas de conversão por etapa e por atendente, identificando gargalos e oportunidades de melhoria.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PLANOS -->
+      <section class="section" id="planos">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Planos simples, foco em resultado.</h2>
+              <p class="section-subtitle">
+                Escolha o plano ideal para o tamanho da sua operação. Todos incluem suporte e atualizações constantes.
+              </p>
+            </div>
+          </div>
+
+          <div class="plans-grid">
+            <div class="plan-card">
+              <div class="plan-label">Essencial</div>
+              <div class="plan-name">Para começar com estrutura</div>
+              <div class="plan-price">
+                R$ 00,00 <span>/mês</span>
+              </div>
+              <p class="plan-desc">
+                Ideal para quem está organizando o primeiro funil e quer centralizar a gestão de leads.
+              </p>
+              <ul class="plan-features">
+                <li>1 funil completo</li>
+                <li>Até X usuários</li>
+                <li>Integração com 1 WhatsApp</li>
+                <li>Dashboards básicos</li>
+              </ul>
+              <div class="plan-cta">
+                <button class="btn-plan" type="button">Começar com Essencial</button>
+              </div>
+            </div>
+
+            <div class="plan-card featured">
+              <div class="plan-label">Profissional</div>
+              <div class="plan-name">Para equipes comerciais</div>
+              <div class="plan-price">
+                R$ 00,00 <span>/mês</span>
+              </div>
+              <p class="plan-desc">
+                Para quem precisa de mais automações, múltiplos funis e visão detalhada da equipe de atendimento.
+              </p>
+              <ul class="plan-features">
+                <li>Funis ilimitados</li>
+                <li>Até X usuários</li>
+                <li>Até X números de WhatsApp</li>
+                <li>Automação avançada por gatilhos</li>
+                <li>Dashboards avançados e relatórios</li>
+              </ul>
+              <div class="plan-cta">
+                <button class="btn-plan" type="button">Testar plano Profissional</button>
+              </div>
+            </div>
+
+            <div class="plan-card">
+              <div class="plan-label">Sob medida</div>
+              <div class="plan-name">Para operação de alto volume</div>
+              <div class="plan-price">
+                Sob consulta <span>/mensal</span>
+              </div>
+              <p class="plan-desc">
+                Para empresas com alto volume de leads, múltiplas unidades e necessidade de integrações específicas.
+              </p>
+              <ul class="plan-features">
+                <li>Onboarding dedicado</li>
+                <li>Integrações via API</li>
+                <li>Treinamento da equipe</li>
+                <li>Acesso a recursos beta</li>
+              </ul>
+              <div class="plan-cta">
+                <button class="btn-plan" type="button">Falar com especialista</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DEPOIMENTOS / PROVA SOCIAL -->
+      <section class="section">
+        <div class="container testimonials-wrap">
+          <div>
+            <h2 class="section-title">Construído para a realidade do dia a dia.</h2>
+            <p class="section-subtitle">
+              Do primeiro contato até o pós-venda, o LeadFLOW-Pro ajuda a manter padrão, velocidade e visão sobre os números que importam.
+            </p>
+            <div class="logos-strip">
+              <span>Equipes comerciais</span>
+              <span>Escolas e cursos</span>
+              <span>Agências de marketing</span>
+              <span>Operação de WhatsApp</span>
+              <span>Atendimento híbrido</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-quote">
+              “Conseguimos organizar toda a jornada do lead, da primeira mensagem à matrícula, com um nível de controle que não tínhamos em planilhas. Ficou claro onde ajustar.”
+            </p>
+            <div class="testimonial-author">
+              <div>
+                <div class="testimonial-name">Coordenação Acadêmica</div>
+                <div class="testimonial-role">Operação de cursos e treinamentos</div>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-size: 0.75rem; color: var(--text-soft);">+32% de conversão em 90 dias</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTATO -->
+      <section class="section" id="contato">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Pronto para testar o LeadFLOW-Pro?</h2>
+              <p class="section-subtitle">
+                Envie seus dados para receber uma demonstração guiada e ver como aplicar o funil na sua operação atual.
+              </p>
+            </div>
+          </div>
+
+          <div class="mockup-card" style="max-width: 640px; margin: 0 auto;">
+            <form>
+              <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; margin-bottom: 0.9rem;">
+                <div>
+                  <label style="display:block; font-size:0.78rem; color:var(--text-soft); margin-bottom:0.2rem;">Nome completo</label>
+                  <input type="text" style="width:100%; padding:0.45rem 0.55rem; border-radius:10px; border:1px solid rgba(148,163,184,0.6); background:rgba(15,23,42,0.95); color:var(--text-main); font-size:0.82rem;" />
+                </div>
+                <div>
+                  <label style="display:block; font-size:0.78rem; color:var(--text-soft); margin-bottom:0.2rem;">E-mail</label>
+                  <input type="email" style="width:100%; padding:0.45rem 0.55rem; border-radius:10px; border:1px solid rgba(148,163,184,0.6); background:rgba(15,23,42,0.95); color:var(--text-main); font-size:0.82rem;" />
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; margin-bottom: 0.9rem;">
+                <div>
+                  <label style="display:block; font-size:0.78rem; color:var(--text-soft); margin-bottom:0.2rem;">WhatsApp</label>
+                  <input type="tel" style="width:100%; padding:0.45rem 0.55rem; border-radius:10px; border:1px solid rgba(148,163,184,0.6); background:rgba(15,23,42,0.95); color:var(--text-main); font-size:0.82rem;" />
+                </div>
+                <div>
+                  <label style="display:block; font-size:0.78rem; color:var(--text-soft); margin-bottom:0.2rem;">Segmento</label>
+                  <input type="text" style="width:100%; padding:0.45rem 0.55rem; border-radius:10px; border:1px solid rgba(148,163,184,0.6); background:rgba(15,23,42,0.95); color:var(--text-main); font-size:0.82rem;" />
+                </div>
+              </div>
+
+              <div style="margin-bottom:0.9rem;">
+                <label style="display:block; font-size:0.78rem; color:var(--text-soft); margin-bottom:0.2rem;">Descreva brevemente sua operação</label>
+                <textarea rows="3" style="width:100%; padding:0.45rem 0.55rem; border-radius:10px; border:1px solid rgba(148,163,184,0.6); background:rgba(15,23,42,0.95); color:var(--text-main); font-size:0.82rem; resize:vertical;"></textarea>
+              </div>
+
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:0.8rem;">
+                <button class="btn-primary" type="submit">
+                  <span>Quero ver na prática</span>
+                </button>
+                <div style="font-size:0.72rem; color:var(--text-soft); max-width:12rem;">
+                  Seus dados serão usados apenas para contato sobre o LeadFLOW-Pro.
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div>
+          © <span id="year"></span> LeadFLOW-Pro. Todos os direitos reservados.
+        </div>
+        <div class="footer-links">
+          <a href="#top" class="footer-link">Início</a>
+          <a href="#planos" class="footer-link">Planos</a>
+          <a href="#contato" class="footer-link">Contato</a>
+          <a href="#" class="footer-link">Política de privacidade</a>
+        </div>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="YouTube">YT</a>
+          <a href="#" aria-label="WhatsApp">WA</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Ajusta ano automático no rodapé
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

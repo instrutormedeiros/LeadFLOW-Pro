@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>LeadFLOW Pro · App</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<style>
+/* ================= DESIGN SYSTEM (Dark / SaaS) ================= */
+:root{
+  --bg:#020617;
+  --bg-elevated:#020617;
+  --bg-soft:#020617;
+  --border:#1f2937;
+
+  --card:#020617;
+  --card-alt:#020617;
+
+  --primary:#2563eb;
+  --primary-soft:rgba(37,99,235,0.18);
+  --success:#22c55e;
+  --danger:#ef4444;
+
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+
+  --radius-lg:20px;
+  --radius:16px;
+  --radius-sm:12px;
+
+  --shadow-soft:0 18px 45px rgba(15,23,42,.9);
+  --shadow-card:0 14px 36px rgba(15,23,42,.9);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html,body{
+  height:100%;
+}
+
+body{
+  font-family:"Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top left,#1f2937 0,#020617 45%,#000 100%);
+  color:var(--text);
+  display:flex;
+  min-height:100vh;
+}
+
+/* ================= BUTTONS ================= */
+button{
+  border:none;
+  padding:10px 16px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:500;
+  font-size:13px;
+  transition:all .2s ease-out;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+button:hover{
+  transform:translateY(-1px);
+  box-shadow:0 15px 35px rgba(15,23,42,.9);
+}
+
+.primary{
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:#f9fafb;
+}
+.success{
+  background:linear-gradient(135deg,#22c55e,#16a34a);
+  color:#ecfdf5;
+}
+.danger{
+  background:linear-gradient(135deg,#ef4444,#b91c1c);
+  color:#fee2e2;
+}
+.outline{
+  background:transparent;
+  color:var(--muted);
+  border:1px solid rgba(148,163,184,.6);
+}
+.outline:hover{
+  background:rgba(15,23,42,.9);
+}
+
+/* ================= LAYOUT ================= */
+.app-shell{
+  display:flex;
+  flex:1;
+}
+
+/* SIDEBAR */
+.sidebar{
+  width:240px;
+  padding:20px 18px;
+  border-right:1px solid rgba(31,41,55,1);
+  background:radial-gradient(circle at top,#020617,#020617 60%,#020617 100%);
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.sidebar-logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:6px;
+}
+
+.logo-badge{
+  width:36px;
+  height:36px;
+  border-radius:14px;
+  background:radial-gradient(circle at 10% 0,#60a5fa,#2563eb 40%,#0f172a 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 12px 30px rgba(37,99,235,.8);
+}
+
+.logo-badge span{
+  font-family:"Poppins",system-ui;
+  font-size:16px;
+  font-weight:700;
+  color:#e5e7eb;
+  letter-spacing:.04em;
+}
+
+.logo-text{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+
+.logo-text-ttl{
+  font-size:15px;
+  font-weight:600;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+.logo-text-sub{
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.sidebar-section-title{
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  margin-top:4px;
+  margin-bottom:6px;
+}
+
+.sidebar-nav{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+.nav-item{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 10px;
+  border-radius:12px;
+  color:var(--muted);
+  font-size:13px;
+  cursor:pointer;
+  transition:background .2s,color .2s,transform .2s;
+}
+
+.nav-item span.icon{
+  width:22px;
+  display:inline-flex;
+  justify-content:center;
+}
+
+.nav-item.active{
+  background:linear-gradient(135deg,rgba(37,99,235,.35),rgba(37,99,235,.15));
+  color:#e5e7eb;
+  box-shadow:0 10px 26px rgba(37,99,235,.5);
+}
+.nav-item:hover{
+  background:rgba(15,23,42,.9);
+  color:#e5e7eb;
+  transform:translateY(-1px);
+}
+
+.sidebar-footer{
+  margin-top:auto;
+  font-size:11px;
+  color:var(--muted);
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.sidebar-footer small{
+  opacity:.8;
+}
+
+/* MAIN AREA */
+.main{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+
+/* HEADER (TOP BAR) */
+.topbar{
+  padding:14px 24px;
+  border-bottom:1px solid rgba(31,41,55,1);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  backdrop-filter:blur(18px);
+  background:linear-gradient(to bottom,rgba(15,23,42,.92),rgba(15,23,42,.65),transparent);
+}
+
+.topbar-left{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+
+.topbar-title{
+  font-size:16px;
+  font-weight:500;
+}
+.topbar-sub{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.topbar-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+/* CONTENT WRAP */
+.content{
+  flex:1;
+  padding:20px 22px 22px;
+  overflow-y:auto;
+}
+
+/* KPIs */
+.top-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+  margin-bottom:22px;
+}
+
+.kpi-card{
+  background:radial-gradient(circle at top left,rgba(148,163,184,.16),rgba(15,23,42,.98));
+  border-radius:var(--radius-lg);
+  padding:16px 18px;
+  box-shadow:var(--shadow-card);
+  display:flex;
+  align-items:center;
+  gap:14px;
+  border:1px solid rgba(148,163,184,.5);
+}
+
+.kpi-icon{
+  width:46px;
+  height:46px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  background:rgba(15,23,42,.96);
+  border:1px solid rgba(148,163,184,.5);
+}
+
+.kpi-info{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+
+.kpi-info span{
+  font-size:11px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.12em;
+}
+.kpi-info strong{
+  font-size:22px;
+  font-weight:600;
+}
+
+/* MAIN GRID */
+.main-grid{
+  display:grid;
+  grid-template-columns:1.1fr 2fr;
+  gap:18px;
+}
+
+/* CARDS */
+.card{
+  background:radial-gradient(circle at top left,rgba(30,64,175,.16),rgba(15,23,42,.98));
+  border-radius:var(--radius-lg);
+  padding:16px 18px 18px;
+  box-shadow:var(--shadow-card);
+  border:1px solid rgba(148,163,184,.5);
+}
+
+.card-alt{
+  background:radial-gradient(circle at top left,rgba(15,23,42,.96),rgba(15,23,42,.98));
+}
+
+.card-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+
+.card-title{
+  font-size:11px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.16em;
+}
+
+.card-sub{
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* INPUTS */
+input, textarea, select{
+  width:100%;
+  padding:11px 12px;
+  border-radius:12px;
+  border:1px solid rgba(51,65,85,1);
+  background:rgba(15,23,42,.96);
+  color:var(--text);
+  font-size:13px;
+}
+
+textarea{min-height:120px;resize:vertical;}
+
+input::placeholder,textarea::placeholder{
+  color:#6b7280;
+}
+
+/* CONSULTORS TAGS */
+.consultores{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:10px;
+}
+
+.consultor{
+  background:rgba(37,99,235,.18);
+  color:#bfdbfe;
+  padding:6px 10px;
+  border-radius:999px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:12px;
+  border:1px solid rgba(59,130,246,.8);
+}
+
+.consultor span{
+  cursor:pointer;
+  color:#fecaca;
+  font-size:11px;
+}
+
+/* FILTERS */
+.filters{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+/* HISTORY */
+.history{
+  max-height:480px;
+  overflow-y:auto;
+}
+
+.lead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 0;
+  border-bottom:1px solid rgba(31,41,55,1);
+}
+.lead:last-child{border-bottom:none}
+
+.lead-info strong{
+  font-size:13px;
+}
+.lead-info small{
+  font-size:11px;
+  color:var(--muted);
+}
+
+.status-area{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.status{
+  padding:6px 14px;
+  border-radius:999px;
+  font-size:11px;
+  cursor:pointer;
+  font-weight:500;
+  border:1px solid transparent;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+.pending{
+  background:rgba(55,65,81,1);
+  color:#e5e7eb;
+  border-color:rgba(55,65,81,1);
+}
+.attended{
+  background:rgba(37,99,235,.25);
+  color:#bfdbfe;
+  border-color:rgba(37,99,235,.85);
+}
+.sale{
+  background:rgba(22,163,74,.3);
+  color:#bbf7d0;
+  border-color:rgba(22,163,74,.9);
+}
+
+.money{
+  font-size:18px;
+  cursor:pointer;
+}
+
+/* SMALL UTILS */
+.mt-10{margin-top:10px}
+.mt-14{margin-top:14px}
+
+/* SCROLLBAR */
+.history::-webkit-scrollbar{
+  width:6px;
+}
+.history::-webkit-scrollbar-thumb{
+  background:#4b5563;
+  border-radius:999px;
+}
+
+/* RESPONSIVE */
+@media (max-width:1024px){
+  .sidebar{
+    display:none;
+  }
+  .main{
+    width:100%;
+  }
+  .top-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+  .main-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media (max-width:640px){
+  .top-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+
+<!-- Chart.js para gráfico real -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+<div class="app-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-badge"><span>LF</span></div>
+      <div class="logo-text">
+        <div class="logo-text-ttl">LeadFLOW-Pro</div>
+        <div class="logo-text-sub">Funis e automações</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sidebar-section-title">Navegação</div>
+      <nav class="sidebar-nav">
+        <div class="nav-item active" data-view="dashboard">
+          <span class="icon">📊</span>
+          <span>Dashboard</span>
+        </div>
+        <div class="nav-item" data-view="leads">
+          <span class="icon">📥</span>
+          <span>Leads</span>
+        </div>
+        <div class="nav-item" data-view="consultores">
+          <span class="icon">👥</span>
+          <span>Consultores</span>
+        </div>
+        <div class="nav-item" data-view="config">
+          <span class="icon">⚙️</span>
+          <span>Configurações</span>
+        </div>
+      </nav>
+    </div>
+
+    <div class="sidebar-footer">
+      <small>Versão 1.0 · Operação interna</small>
+      <small>Dados armazenados localmente (navegador).</small>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title">Painel de leads</div>
+        <div class="topbar-sub">Distribuição, status e desempenho em tempo real.</div>
+      </div>
+      <div class="topbar-right">
+        <button class="outline" type="button" onclick="window.location.href='LeadFLOW-Pro.html'">
+          Voltar para início
+        </button>
+        <button class="success" id="btnExportar">Exportar CSV</button>
+        <button class="danger" id="btnResetar">Resetar Leads</button>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="content">
+      <!-- VIEW: DASHBOARD -->
+      <section class="view" id="view-dashboard">
+        <!-- KPIs -->
+        <section class="top-grid">
+          <article class="kpi-card">
+            <div class="kpi-icon">📥</div>
+            <div class="kpi-info">
+              <span>Total Leads</span>
+              <strong id="kTotal">0</strong>
+            </div>
+          </article>
+          <article class="kpi-card">
+            <div class="kpi-icon">📞</div>
+            <div class="kpi-info">
+              <span>Atendidos</span>
+              <strong id="kAtendidos">0</strong>
+            </div>
+          </article>
+          <article class="kpi-card">
+            <div class="kpi-icon">💰</div>
+            <div class="kpi-info">
+              <span>Vendas</span>
+              <strong id="kVendas">0</strong>
+            </div>
+          </article>
+          <article class="kpi-card">
+            <div class="kpi-icon">📈</div>
+            <div class="kpi-info">
+              <span>Conversão</span>
+              <strong id="kConv">0%</strong>
+            </div>
+          </article>
+        </section>
+
+        <!-- GRÁFICO + RESUMO -->
+        <section class="main-grid" style="margin-top:10px;">
+          <!-- Gráfico de tendência -->
+          <article class="card card-alt">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Evolução de leads</div>
+                <div class="card-sub">Últimos 7 pontos de movimentação (dados e projeções).</div>
+              </div>
+            </div>
+
+            <div style="height:180px;margin-top:6px;">
+              <canvas id="graficoLeads"></canvas>
+            </div>
+          </article>
+
+          <!-- Funil + taxa -->
+          <article class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Funil resumido</div>
+                <div class="card-sub">Distribuição atual dos leads por estágio.</div>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px;font-size:12px;">
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                  <span style="color:var(--muted);">Pendente</span>
+                  <span id="funil-pendente-label">0</span>
+                </div>
+                <div style="width:100%;height:8px;border-radius:999px;background:#020617;border:1px solid #1f2937;overflow:hidden;">
+                  <div id="funil-pendente-bar" style="height:100%;width:0;background:linear-gradient(90deg,#6b7280,#9ca3af);"></div>
+                </div>
+              </div>
+
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                  <span style="color:var(--muted);">Atendido</span>
+                  <span id="funil-atendido-label">0</span>
+                </div>
+                <div style="width:100%;height:8px;border-radius:999px;background:#020617;border:1px solid #1f2937;overflow:hidden;">
+                  <div id="funil-atendido-bar" style="height:100%;width:0;background:linear-gradient(90deg,#2563eb,#38bdf8);"></div>
+                </div>
+              </div>
+
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                  <span style="color:var(--muted);">Venda</span>
+                  <span id="funil-venda-label">0</span>
+                </div>
+                <div style="width:100%;height:8px;border-radius:999px;background:#020617;border:1px solid #1f2937;overflow:hidden;">
+                  <div id="funil-venda-bar" style="height:100%;width:0;background:linear-gradient(90deg,#22c55e,#a3e635);"></div>
+                </div>
+              </div>
+            </div>
+
+            <p style="font-size:11px;color:var(--muted);margin-top:10px;">
+              O funil é calculado em cima dos leads cadastrados nesta instância do painel.
+            </p>
+          </article>
+        </section>
+
+        <!-- Últimos leads -->
+        <section class="card card-alt" style="margin-top:18px;">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Últimos leads</div>
+              <div class="card-sub">Últimos 6 registros criados, para acompanhamento rápido.</div>
+            </div>
+          </div>
+
+          <div id="ultimos-leads" style="display:flex;flex-direction:column;gap:6px;font-size:12px;"></div>
+        </section>
+      </section>
+
+      <!-- VIEW: LEADS -->
+      <section class="view" id="view-leads" style="display:none;">
+        <section class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Leads</div>
+              <div class="card-sub">Lista de leads com filtros por consultor e status.</div>
+            </div>
+          </div>
+
+          <div class="filters">
+            <select id="fConsultor"></select>
+            <select id="fStatus">
+              <option value="">Todos Status</option>
+              <option value="pending">Pendente</option>
+              <option value="attended">Atendido</option>
+              <option value="sale">Venda</option>
+            </select>
+          </div>
+
+          <div class="history" id="lista"></div>
+        </section>
+      </section>
+
+      <!-- VIEW: CONSULTOR -->
+      <section class="view" id="view-consultores" style="display:none;">
+        <section class="main-grid">
+          <article class="card card-alt">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Consultores</div>
+                <div class="card-sub">Cadastre, visualize e gerencie a equipe de atendimento.</div>
+              </div>
+            </div>
+
+            <input id="consultorInput" placeholder="Nome do consultor + Enter">
+            <div class="consultores" id="listaConsultores"></div>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Distribuir novos leads</div>
+                <div class="card-sub">Cole abaixo os contatos (um por linha) para distribuir automaticamente.</div>
+              </div>
+            </div>
+
+            <textarea id="leadsInput" placeholder="Ex.: Nome - Telefone - Observações (1 por linha)"></textarea>
+
+            <button class="primary mt-14" id="btnDistribuir" style="width:100%;justify-content:center;">
+              Distribuir Leads
+            </button>
+          </article>
+        </section>
+      </section>
+
+      <!-- VIEW: CONFIG -->
+      <section class="view" id="view-config" style="display:none;">
+        <section class="card card-alt">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Configurações</div>
+              <div class="card-sub">Ajustes gerais do painel e operações administrativas.</div>
+            </div>
+          </div>
+
+          <p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.6;">
+            As configurações atuais são focadas em manutenção dos dados locais.
+          </p>
+
+          <div style="display:flex;flex-wrap:wrap;gap:10px;">
+            <button class="success" id="btnExportar">Exportar CSV</button>
+            <button class="danger" id="btnResetar">Resetar Leads</button>
+          </div>
+
+          <p style="font-size:12px;color:var(--muted);margin-top:10px;">
+            Os dados são salvos apenas no navegador via <strong>localStorage</strong>. Para uso multi-dispositivo,
+            basta futuramente conectar este painel a um backend ou Firebase.
+          </p>
+        </section>
+      </section>
+    </main>
+  </div>
+
+</div>
+
+<script>
+// ===== DADOS EM LOCALSTORAGE =====
+const consultores = JSON.parse(localStorage.getItem("consultores")) || [];
+const leads = JSON.parse(localStorage.getItem("leads")) || [];
+
+// ===== ELEMENTOS =====
+const consultorInput = document.getElementById("consultorInput");
+const leadsInput = document.getElementById("leadsInput");
+const lista = document.getElementById("lista");
+const listaConsultores = document.getElementById("listaConsultores");
+const fConsultor = document.getElementById("fConsultor");
+const fStatus = document.getElementById("fStatus");
+
+// KPIs
+const kTotal = document.getElementById("kTotal");
+const kAtendidos = document.getElementById("kAtendidos");
+const kVendas = document.getElementById("kVendas");
+const kConv = document.getElementById("kConv");
+
+// Botões
+const btnDistribuir = document.getElementById("btnDistribuir");
+const btnExportar = document.getElementById("btnExportar");
+const btnResetar = document.getElementById("btnResetar");
+
+// ===== FUNÇÕES BASE =====
+function salvar(){
+  localStorage.setItem("consultores", JSON.stringify(consultores));
+  localStorage.setItem("leads", JSON.stringify(leads));
+}
+
+function atualizarKPIs(){
+  const total = leads.length;
+  const atendidos = leads.filter(l => l.status !== "pending").length;
+  const vendas = leads.filter(l => l.status === "sale").length;
+
+  kTotal.innerText = total;
+  kAtendidos.innerText = atendidos;
+  kVendas.innerText = vendas;
+  kConv.innerText = total ? Math.round((vendas/total)*100) + "%" : "0%";
+}
+
+// ===== FUNIL RESUMIDO =====
+function atualizarFunil(){
+  const pendentes = leads.filter(l => l.status === "pending").length;
+  const atendidos = leads.filter(l => l.status === "attended").length;
+  const vendas = leads.filter(l => l.status === "sale").length;
+  const total = pendentes + atendidos + vendas || 1;
+
+  const pPerc = Math.round((pendentes/total)*100);
+  const aPerc = Math.round((atendidos/total)*100);
+  const vPerc = Math.round((vendas/total)*100);
+
+  document.getElementById("funil-pendente-label").innerText = `${pendentes} (${pPerc}%)`;
+  document.getElementById("funil-atendido-label").innerText = `${atendidos} (${aPerc}%)`;
+  document.getElementById("funil-venda-label").innerText = `${vendas} (${vPerc}%)`;
+
+  document.getElementById("funil-pendente-bar").style.width = pPerc + "%";
+  document.getElementById("funil-atendido-bar").style.width = aPerc + "%";
+  document.getElementById("funil-venda-bar").style.width = vPerc + "%";
+}
+
+let chartLeads = null;
+
+// ===== GRÁFICO REAL (Chart.js) =====
+function gerarSerieFake(base){
+  const serie = [];
+  let atual = base;
+  for(let i = 0; i < 7; i++){
+    const delta = Math.round((Math.random() - 0.2) * (base ? base*0.15 : 5));
+    atual = Math.max(0, atual + delta);
+    serie.push(atual);
+  }
+  return serie;
+}
+
+function atualizarTrend(){
+  const ctx = document.getElementById("graficoLeads");
+  if(!ctx) return;
+
+  const total = leads.length || 10;
+  const dados = gerarSerieFake(total);
+  const labels = ["-6", "-5", "-4", "-3", "-2", "-1", "Hoje"];
+
+  const inicio = dados[0];
+  const fim = dados[dados.length - 1];
+  const diff = fim - inicio;
+  const perc = inicio ? Math.round(Math.abs(diff)/inicio*100) : 0;
+  const texto = `Projeção: ${fim} (${diff >= 0 ? "+" : "-"}${perc}%) vs início.`;
+
+  if(chartLeads){
+    chartLeads.destroy();
+  }
+
+  chartLeads = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels,
+      datasets: [{
+        label: "Leads",
+        data: dados,
+        fill: true,
+        tension: 0.35,
+        borderColor: "#38bdf8",
+        backgroundColor: "rgba(56,189,248,0.16)",
+        borderWidth: 2,
+        pointRadius: 3,
+        pointBackgroundColor: "#0ea5e9"
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display:false },
+        tooltip: {
+          backgroundColor:"#020617",
+          borderColor:"#1f2937",
+          borderWidth:1,
+          titleColor:"#e5e7eb",
+          bodyColor:"#e5e7eb"
+        },
+        title:{
+          display:true,
+          text:texto,
+          color:"#9ca3af",
+          font:{size:11, weight:"normal"}
+        }
+      },
+      scales: {
+        x: {
+          ticks:{ color:"#6b7280", font:{size:11}},
+          grid:{ display:false }
+        },
+        y: {
+          ticks:{ color:"#6b7280", font:{size:11}},
+          grid:{ color:"rgba(31,41,55,0.7)" }
+        }
+      }
+    }
+  });
+}
+
+// ===== ÚLTIMOS LEADS =====
+function atualizarUltimosLeads(){
+  const box = document.getElementById("ultimos-leads");
+  if(!box) return;
+
+  box.innerHTML = "";
+
+  if(!leads.length){
+    box.innerHTML = '<span style="color:var(--muted);">Nenhum lead cadastrado ainda.</span>';
+    return;
+  }
+
+  const ultimos = [...leads].slice(-6).reverse();
+  ultimos.forEach(l => {
+    const linha = document.createElement("div");
+    linha.style.display = "flex";
+    linha.style.justifyContent = "space-between";
+    linha.style.alignItems = "center";
+    linha.style.padding = "4px 0";
+    linha.style.borderBottom = "1px solid rgba(31,41,55,0.7)";
+
+    const info = document.createElement("div");
+    info.innerHTML = `<strong>${l.lead || "Lead"}</strong><br><span style="color:var(--muted);font-size:11px;">${l.consultor || "-"}</span>`;
+
+    const status = document.createElement("span");
+    status.style.fontSize = "11px";
+    status.style.textTransform = "uppercase";
+    status.style.letterSpacing = ".08em";
+    status.style.color = "#9ca3af";
+
+    if(l.status === "pending") status.innerText = "Pendente";
+    else if(l.status === "attended") status.innerText = "Atendido";
+    else status.innerText = "Venda";
+
+    linha.appendChild(info);
+    linha.appendChild(status);
+    box.appendChild(linha);
+  });
+}
+
+// ===== CÁLCULO DO PRÓXIMO STATUS =====
+function proximoStatus(status){
+  if(status === "pending") return "attended";
+  if(status === "attended") return "sale";
+  return "pending";
+}
+
+// ===== DISTRIBUIÇÃO BALANCEADA =====
+function escolherConsultorBalanceado(){
+  if(!leads.length){
+    return consultores[0];
+  }
+
+  const contagem = {};
+  consultores.forEach(c => contagem[c] = 0);
+
+  leads.forEach(l => {
+    if(l.consultor && contagem.hasOwnProperty(l.consultor)){
+      contagem[l.consultor] += 1;
+    }
+  });
+
+  let escolhido = consultores[0];
+  let menor = contagem[escolhido];
+
+  consultores.forEach(c => {
+    if(contagem[c] < menor){
+      menor = contagem[c];
+      escolhido = c;
+    }
+  });
+
+  return escolhido;
+}
+
+// ===== RENDER =====
+function renderConsultores(){
+  listaConsultores.innerHTML = "";
+  fConsultor.innerHTML = '<option value="">Todos Consultores</option>';
+
+  consultores.forEach((c, i) => {
+    const div = document.createElement("div");
+    div.className = "consultor";
+    div.innerHTML = `${c} <span onclick="removerConsultor(${i})">✖</span>`;
+    listaConsultores.appendChild(div);
+
+    const opt = document.createElement("option");
+    opt.value = c;
+    opt.textContent = c;
+    fConsultor.appendChild(opt);
+  });
+}
+
+function render(){
+  lista.innerHTML = "";
+  const fc = fConsultor.value;
+  const fs = fStatus.value;
+
+  leads
+    .filter(l => !fc || l.consultor === fc)
+    .filter(l => !fs || l.status === fs)
+    .forEach((l, i) => {
+      const div = document.createElement("div");
+      div.className = "lead";
+      div.innerHTML = `
+        <div class="lead-info">
+          <strong>${l.lead || "Lead"}</strong><br>
+          <small>${l.consultor || "-"}</small>
+        </div>
+        <div class="status-area">
+          <span class="status ${l.status}" onclick="alterarStatus(${i})">
+            ${l.status==="pending" ? "Pendente" : l.status==="attended" ? "Atendido" : "Venda"}
+          </span>
+          <span class="money" onclick="marcarVenda(${i})">💰</span>
+        </div>`;
+      lista.appendChild(div);
+    });
+
+  atualizarKPIs();
+  atualizarFunil();
+  atualizarTrend();
+  atualizarUltimosLeads();
+}
+
+// ===== AÇÕES =====
+function alterarStatus(i){
+  leads[i].status = proximoStatus(leads[i].status);
+  salvar();
+  render();
+}
+
+function marcarVenda(i){
+  leads[i].status = "sale";
+  salvar();
+  render();
+}
+
+function removerConsultor(i){
+  consultores.splice(i,1);
+  salvar();
+  renderConsultores();
+  render();
+}
+
+// ===== EVENTOS =====
+consultorInput.addEventListener("keydown", e => {
+  if(e.key === "Enter" && consultorInput.value.trim()){
+    consultores.push(consultorInput.value.trim());
+    consultorInput.value = "";
+    salvar();
+    renderConsultores();
+  }
+});
+
+btnDistribuir.onclick = () => {
+  if(!consultores.length){
+    alert("Cadastre consultores antes de distribuir.");
+    return;
+  }
+  const linhas = leadsInput.value.split("\n").map(l => l.trim()).filter(Boolean);
+  if(!linhas.length){
+    alert("Cole leads para distribuir.");
+    return;
+  }
+
+  linhas.forEach(l => {
+    const consultorEscolhido = escolherConsultorBalanceado();
+    leads.push({
+      lead: l,
+      consultor: consultorEscolhido,
+      status: "pending"
+    });
+  });
+
+  leadsInput.value = "";
+  salvar();
+  render();
+};
+
+btnExportar.onclick = () => {
+  let csv = "Lead;Consultor;Status\n";
+  leads.forEach(l => {
+    csv += `${l.lead};${l.consultor};${l.status}\n`;
+  });
+  const blob = new Blob([csv], {type:"text/csv;charset=utf-8;"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "leadflow.csv";
+  a.click();
+};
+
+btnResetar.onclick = () => {
+  if(confirm("Deseja apagar todos os leads?")){
+    leads.length = 0;
+    salvar();
+    render();
+  }
+};
+
+fConsultor.onchange = render;
+fStatus.onchange = render;
+
+// ===== TROCA DE VIEWS (SIDEBAR) =====
+const navItems = document.querySelectorAll(".nav-item");
+const views = document.querySelectorAll(".view");
+
+navItems.forEach(item => {
+  item.addEventListener("click", () => {
+    const viewTarget = item.getAttribute("data-view");
+
+    navItems.forEach(n => n.classList.remove("active"));
+    item.classList.add("active");
+
+    views.forEach(v => {
+      v.style.display = (v.id === "view-" + viewTarget) ? "block" : "none";
+    });
+  });
+});
+
+// ===== INICIAL =====
+renderConsultores();
+render();
+</script>
+
+</body>
+</html>
